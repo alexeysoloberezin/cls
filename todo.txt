@@ -1,0 +1,7 @@
+- проверить input - что бы курсор не ломался
+- страница users
+- страница агенты добавить pagins-search
+- вылазиет сохранить пароль - нужно убрать
+
+git submodule add http://gitlab-bst.bastion-tech.ru/platforma/ui-kit.git path/to/ui-kit
+git submodule update --init --recursive

@@ -1,0 +1,46 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es6",
+    "emitDeclarationOnly": true,
+    "composite": true,
+    "baseUrl": "src",
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@entities/*": [
+        "entities/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@shared/ui": ["shared/ui/index.ts"],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@widgets/*": [
+        "widgets/*"
+      ],
+      "@processes/*": [
+        "processes/*"
+      ]
+    }
+  }
+}

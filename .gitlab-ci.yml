@@ -1,0 +1,83 @@
+stages:
+  - build
+  - post-build
+
+cache:
+  paths:
+    - node_modules/
+
+build frontend:
+  stage: build
+  script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - front
+  tags:
+    - goad
+
+post-build-frontend-stable:
+  stage: post-build
+  image: mcr.microsoft.com/powershell:latest-windowsservercore
+  script:
+    - |
+      Write-Host "🚀 Переносим фронтенд-сборку (папка front) в стабильную директорию..."
+
+      $source = Join-Path -Path $env:CI_PROJECT_DIR -ChildPath "front"
+      $destination = "C:\Users\cobra\Desktop\stable\front"
+
+      Write-Host "📁 Исходная папка билда: $source"
+      Write-Host "📂 Копируем в: $destination"
+
+      if (-Not (Test-Path $source)) {
+        Write-Host "❌ Папка сборки не найдена по пути $source. Проверь, что job 'build frontend' выполнился корректно."
+        exit 1
+      }
+
+      if (Test-Path $destination) {
+        Remove-Item -Recurse -Force $destination
+      }
+
+      Copy-Item -Path "$source" -Destination "$destination" -Recurse -Force
+
+      Write-Host "✅ Фронтенд-сборка успешно перенесена в $destination"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  tags:
+    - bdt
+
+post-build-frontend-devel:
+  stage: post-build
+  image: mcr.microsoft.com/powershell:latest-windowsservercore
+  script:
+    - |
+      Write-Host "🚀 Переносим фронтенд-сборку (папка front) в DEV директорию..."
+
+      $source = Join-Path -Path $env:CI_PROJECT_DIR -ChildPath "front"
+      $destination = "C:\Users\cobra\Desktop\dev\front"
+
+      Write-Host "📁 Исходная папка билда: $source"
+      Write-Host "📂 Копируем в: $destination"
+
+      if (-Not (Test-Path $source)) {
+        Write-Host "❌ Папка сборки не найдена по пути $source. Проверь, что job 'build frontend' выполнился корректно."
+        exit 1
+      }
+
+      if (Test-Path $destination) {
+        Remove-Item -Recurse -Force $destination
+      }
+
+      Copy-Item -Path "$source" -Destination "$destination" -Recurse -Force
+
+      Write-Host "✅ DEV сборка успешно перенесена в $destination"
+  rules:
+     - if: '$CI_COMMIT_BRANCH =~ /^MALWARE.*/'
+  tags:
+    - goad
+
+

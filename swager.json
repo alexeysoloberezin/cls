@@ -1,0 +1,1193 @@
+{
+    "schemes": [
+      
+    ],
+    "swagger": "2.0",
+    "info": {
+      "description": "This is a sample bdt-backend documentation API saver on the OpenAPI 2.0 specification.",
+      "title": "bdt-backend - backend server for security AD analyze",
+      "contact": {
+        
+      },
+      "version": "0.1.0"
+    },
+    "host": "10.199.113.225:80",
+    "basePath": "",
+    "paths": {
+      "/api/v1/aitask/create": {
+        "post": {
+          "description": "Send data to analyze with ml",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "Ai"
+          ],
+          "summary": "Send data to analyze with ml",
+          "parameters": [
+            {
+              "description": "Analyze data",
+              "name": "json",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.GpuCreateTask"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/aitask/save": {
+        "post": {
+          "description": "Send data to analyze with ml",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "Ai"
+          ],
+          "summary": "Send data to analyze with ml",
+          "parameters": [
+            {
+              "description": "llm data for save",
+              "name": "json",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/gpuApi.Save"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/attack/": {
+        "post": {
+          "description": "Getting all attacks rows with filtering",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "Attack"
+          ],
+          "summary": "Get attacks data: rows with all attacks",
+          "parameters": [
+            {
+              "description": "filter options",
+              "name": "api.FilterElements",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.FilterElements"
+              }
+            },
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.AttacksInfo"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/attack/_filterdef": {
+        "get": {
+          "description": "Get options for filtering data",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Attack"
+          ],
+          "summary": "Get filterdef",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.FilterDef"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/attack/create": {
+        "post": {
+          "description": "Create new attack with scan vulns",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Attack"
+          ],
+          "summary": "Create new attack with scan vulns",
+          "parameters": [
+            {
+              "description": "params for new attack",
+              "name": "json",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.CreateAttack"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/attack/start": {
+        "post": {
+          "description": "Start attack by id",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Attack"
+          ],
+          "summary": "Start attack by id",
+          "parameters": [
+            {
+              "description": "start id attack",
+              "name": "json",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.StartAttack"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/attack/status": {
+        "post": {
+          "description": "Getting statuses from services",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Attack"
+          ],
+          "summary": "Getting statuses from services",
+          "parameters": [
+            {
+              "description": "status, attack id and message info",
+              "name": "json",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.ServiceStatus"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/cert/": {
+        "post": {
+          "description": "Getting all cert vulns with filtering by attack id",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "CertVuln"
+          ],
+          "summary": "Get cert vulns: rows with group vulns",
+          "parameters": [
+            {
+              "description": "filter options",
+              "name": "api.FilterElements",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.FilterElements"
+              }
+            },
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.CertVulnInfo"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/cert/_filterdef": {
+        "get": {
+          "description": "Get options for filtering data",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "CertVuln"
+          ],
+          "summary": "Get filterdef",
+          "parameters": [
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.FilterDef"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/dc/": {
+        "post": {
+          "description": "Getting all dc by CIDR",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "Dc"
+          ],
+          "summary": "Get dc ip: rows with finded dc with ip",
+          "parameters": [
+            {
+              "description": "filter options",
+              "name": "api.FilterElements",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.FilterElements"
+              }
+            },
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.DcInfo"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/dc/_filterdef": {
+        "get": {
+          "description": "Get options for filtering data",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Dc"
+          ],
+          "summary": "Get filterdef",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.FilterDef"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/filev/": {
+        "post": {
+          "description": "Getting files with credentials by attack id",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "FileVuln"
+          ],
+          "summary": "Getting files with credentials",
+          "parameters": [
+            {
+              "description": "filter options",
+              "name": "api.FilterElements",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.FilterElements"
+              }
+            },
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.FileVulnInfo"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/filev/_filterdef": {
+        "get": {
+          "description": "Get options for filtering data",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "FileVuln"
+          ],
+          "summary": "Get filterdef",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.FilterDef"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/gr3pr/": {
+        "post": {
+          "description": "Getting all attacks rows with filtering",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "GroupVuln"
+          ],
+          "summary": "Get group vulns: rows with group vulns",
+          "parameters": [
+            {
+              "description": "filter options",
+              "name": "api.FilterElements",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.FilterElements"
+              }
+            },
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.GroupVulnInfo"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/gr3pr/_filterdef": {
+        "get": {
+          "description": "Get options for filtering data",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "GroupVuln"
+          ],
+          "summary": "Get filterdef",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.FilterDef"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/krb/asr": {
+        "post": {
+          "description": "Get all users with not req pre auth",
+          "tags": [
+            "Kerberos"
+          ],
+          "summary": "Get all users with not req pre auth",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.SpnUsers"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/krb/spn": {
+        "post": {
+          "description": "Get all users with hasspn",
+          "tags": [
+            "Kerberos"
+          ],
+          "summary": "Get all users with hasspn",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.SpnUsers"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/load/": {
+        "post": {
+          "description": "Load Artifacts by agent (path to files and type)",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "Load"
+          ],
+          "summary": "Load Artifacts by agent",
+          "parameters": [
+            {
+              "description": "Artifacts data",
+              "name": "json",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/api.AgentDataArray"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/scanv/": {
+        "post": {
+          "description": "Get scan files results by attack id",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "tags": [
+            "ScanVuln"
+          ],
+          "summary": "Get scan files results",
+          "parameters": [
+            {
+              "type": "integer",
+              "default": 1,
+              "description": "page number",
+              "name": "page",
+              "in": "query"
+            },
+            {
+              "type": "integer",
+              "default": 20,
+              "description": "number of posts per page",
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.ScanVulnInfo"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/statistics": {
+        "get": {
+          "description": "Statistics info",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Status"
+          ],
+          "summary": "Statistics info",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/api.Statistics"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/status/agent/stop": {
+        "post": {
+          "description": "Stop agent attack",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Status"
+          ],
+          "summary": "Stop agent attack",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/status/gpu/stop": {
+        "post": {
+          "description": "Stop GPU server",
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "Status"
+          ],
+          "summary": "Stop GPU server",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/bdt-backend_internal_http_api.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "api.AgentData": {
+        "description": "Contains pathes with agent artifacts",
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "api.AgentDataArray": {
+        "description": "Contains agent data",
+        "type": "object",
+        "properties": {
+          "agentdata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.AgentData"
+            }
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "api.Attack": {
+        "description": "Contains data about attack",
+        "type": "object",
+        "properties": {
+          "cidr": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "endtime": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "starttime": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string"
+          }
+        }
+      },
+      "api.AttacksInfo": {
+        "description": "Contains info with created attacks",
+        "type": "object",
+        "properties": {
+          "attack": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.Attack"
+            }
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      },
+      "api.CertVuln": {
+        "description": "Contains vuln about cert policy",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "vulnInfo": {
+            "type": "string"
+          }
+        }
+      },
+      "api.CertVulnInfo": {
+        "description": "Contains file that produced scanner and count",
+        "type": "object",
+        "properties": {
+          "certvuln": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.CertVuln"
+            }
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      },
+      "api.CreateAttack": {
+        "description": "Create new attack with info",
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "ip_range": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string"
+          }
+        }
+      },
+      "api.Dc": {
+        "description": "Contains dc name - ip",
+        "type": "object",
+        "properties": {
+          "dc": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          }
+        }
+      },
+      "api.DcInfo": {
+        "description": "Contains dc name - ip and count",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "dchost": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.Dc"
+            }
+          }
+        }
+      },
+      "api.Element": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "api.FileVuln": {
+        "type": "object",
+        "properties": {
+          "ai": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "api.FileVulnInfo": {
+        "description": "Contains vulnerability files and count that finded by snaffler",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "filevuln": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.FileVuln"
+            }
+          }
+        }
+      },
+      "api.FilterDef": {
+        "description": "FilterDef api info",
+        "type": "object",
+        "properties": {
+          "filterdef": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.FilterDefElement"
+            }
+          }
+        }
+      },
+      "api.FilterDefElement": {
+        "description": "FilterDefElement api info",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "valuetype": {
+            "type": "string"
+          }
+        }
+      },
+      "api.FilterElements": {
+        "description": "FilterElements api info",
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.Element"
+            }
+          }
+        }
+      },
+      "api.GpuCreateTask": {
+        "type": "object",
+        "properties": {
+          "attack_id": {
+            "type": "string"
+          },
+          "file_content": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "task_nodes": {
+            "type": "string"
+          },
+          "task_type": {
+            "type": "string"
+          }
+        }
+      },
+      "api.GroupVuln": {
+        "description": "Contains vulnerability with group domain policy",
+        "type": "object",
+        "properties": {
+          "ai": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "finding": {
+            "type": "string"
+          },
+          "gpo": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "policy_type": {
+            "type": "string"
+          },
+          "setting_type": {
+            "type": "string"
+          }
+        }
+      },
+      "api.GroupVulnInfo": {
+        "description": "Contains info with groups policy vulns",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "groupvuln": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.GroupVuln"
+            }
+          }
+        }
+      },
+      "api.ScanVuln": {
+        "description": "Contains file that produced scanner",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "scanName": {
+            "type": "string"
+          }
+        }
+      },
+      "api.ScanVulnInfo": {
+        "description": "Contains file that produced scanner and count",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "scanvuln": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/api.ScanVuln"
+            }
+          }
+        }
+      },
+      "api.ServiceStatus": {
+        "description": "Set service status for backend",
+        "type": "object",
+        "properties": {
+          "attack_id": {
+            "type": "string"
+          },
+          "info_id": {
+            "description": "optional",
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "service": {
+            "description": "gpu or agent",
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "api.SpnUsers": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "api.StartAttack": {
+        "description": "StartAttack by id",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "api.Statistics": {
+        "description": "Statistics info",
+        "type": "object",
+        "properties": {
+          "active_attack": {
+            "type": "integer"
+          },
+          "attack_num": {
+            "type": "integer"
+          },
+          "last_attack_vuln": {
+            "type": "integer"
+          }
+        }
+      },
+      "bdt-backend_internal_http_api.ErrorResponse": {
+        "description": "ErrorResponse api info",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "gpuApi.Save": {
+        "description": "GPU llm data recieve API api info",
+        "type": "object",
+        "properties": {
+          "attack_id": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string"
+          },
+          "vuln_id": {
+            "type": "string"
+          },
+          "vuln_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "Bearer": {
+        "description": "Type \"Bearer\" followed by a space and JWT token.",
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
